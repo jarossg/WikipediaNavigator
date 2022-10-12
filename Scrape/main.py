@@ -6,6 +6,7 @@ from article import article
 
 start = "https://de.wikipedia.org/wiki/Deutschland"
 base = "https://de.wikipedia.org"
+firebase = "https://console.firebase.google.com/project/wikipedianavigator/database/wikipedianavigator-default-rtdb/data/~2F"
 
 @logger.catch()
 def create_tag(tag):
@@ -18,7 +19,7 @@ def create_tag(tag):
 
 def make_article(url):
 	req = requests.get(url).content
-	soup = BeautifulSoup(req, "lxml")
+	soup = BeautifulSoup(req, "html.parser")
 	text = soup.body.find(id="content").find(id="bodyContent")
 	
 	tags = text.find_all("a")
@@ -32,11 +33,11 @@ def make_article(url):
 	test = article(title,url,tag_list)
 	return test
 
+def upload(article):
+    data = article.get_json()
+    requests.post(firebase + "/" + article.url, json=data)
+
 if __name__ == "__main__":
 	artikel = make_article(start)
-	
+	upload(artikel)
 	print(artikel.title)
-	for url in artikel.tags:
-		print(url["text"])
-	#print(artikel.tags[5]["url"]) 
-	#print(requests.get(start).content)
