@@ -7,5 +7,6 @@ class article:
         self.title = title
         self.url = url
         self.tags = tags
+        
     def get_json(self):
         return {"title":self.title, "url":self.url,"tags":self.tags}

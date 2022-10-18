@@ -1,12 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 from loguru import logger
+import threading
+from random import randrange
 
 from article import article
 
 start = "https://de.wikipedia.org/wiki/Deutschland"
 base = "https://de.wikipedia.org"
 firebase = "https://wikipedianavigator-default-rtdb.europe-west1.firebasedatabase.app/articles"
+
+start = "https://de.wikipedia.org/wiki/%CE%9413C"
 
 @logger.catch()
 def create_tag(tag):
@@ -18,7 +22,13 @@ def create_tag(tag):
 	return res
 
 def make_article(url):
-	req = requests.get(url).content
+	req = requests.get(url)
+
+	if req.status_code != 200:
+		return None
+
+	req = req.content
+
 	soup = BeautifulSoup(req, "html.parser")
 	text = soup.body.find(id="content").find(id="bodyContent")
 	
@@ -35,9 +45,23 @@ def make_article(url):
 
 def upload(article):
     data = article.get_json()
-    requests.put(firebase + "/" + article.title + ".json", json=data)
+    req = requests.put(firebase + "/" + article.title + ".json", json=data)
+    if req.status_code != 200:
+        logger.error("Upload failed")
+    else:
+        logger.info(article.title + " uploaded")
+
+@logger.catch()
+def process_article(URL):
+	artikel = make_article(URL)
+	if artikel != None:
+		upload(artikel)
+		return artikel.tags
+	return []
 
 if __name__ == "__main__":
-	artikel = make_article(start)
-	upload(artikel)
-	print(artikel.title)
+	tags = process_article(start)
+	
+	while True:
+		for tag in tags:
+			tags = tags + process_article(tag["url"])
