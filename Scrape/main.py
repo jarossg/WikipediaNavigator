@@ -33,7 +33,7 @@ def make_article(url):
 	text = soup.body.find(id="content").find(id="bodyContent")
 	
 	tags = text.find_all("a")
-	title = soup.body.find(id="content").find(id="firstHeading").span.text
+	title = soup.body.find(id="content").find(id="firstHeading").text
 	
 	tag_list = []
 	for tag in tags:
