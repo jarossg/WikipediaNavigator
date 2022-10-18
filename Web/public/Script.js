@@ -7,17 +7,20 @@ function httpGet(theUrl)
 }
 
 
-var data = httpGet("https://wikipedianavigator-default-rtdb.europe-west1.firebasedatabase.app/articles.json");
-console.log(data);
+//var data = httpGet("https://wikipedianavigator-default-rtdb.europe-west1.firebasedatabase.app/articles.json");
+//console.log(data);
 
 
-var nodes = new vis.DataSet([
+function start(){
+  var nodes = new vis.DataSet([
     { id: 1, label: "Node 1" },
     { id: 2, label: "Node 2" },
     { id: 3, label: "Node 3" },
     { id: 4, label: "Node 4" },
     { id: 5, label: "Node 5" },
   ]);
+
+  nodes.add({id: 6, label: "Knoten"});
 
   // create an array with edges
   var edges = new vis.DataSet([
@@ -28,11 +31,18 @@ var nodes = new vis.DataSet([
     { from: 3, to: 3 },
   ]);
 
+  buildGraph(nodes, edges);
+}
+
+
+function buildGraph(nodes, edges){
   // create a network
   var container = document.getElementById("network");
   var data = {
     nodes: nodes,
     edges: edges,
   };
+
   var options = {};
   var network = new vis.Network(container, data, options);
+}
