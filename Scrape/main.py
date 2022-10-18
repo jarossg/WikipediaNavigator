@@ -6,7 +6,7 @@ from article import article
 
 start = "https://de.wikipedia.org/wiki/Deutschland"
 base = "https://de.wikipedia.org"
-firebase = "https://console.firebase.google.com/project/wikipedianavigator/database/wikipedianavigator-default-rtdb/data/~2F"
+firebase = "https://wikipedianavigator-default-rtdb.europe-west1.firebasedatabase.app/articles"
 
 @logger.catch()
 def create_tag(tag):
@@ -35,7 +35,7 @@ def make_article(url):
 
 def upload(article):
     data = article.get_json()
-    requests.post(firebase + "/" + article.url, json=data)
+    requests.put(firebase + "/" + article.title + ".json", json=data)
 
 if __name__ == "__main__":
 	artikel = make_article(start)
