@@ -10,7 +10,7 @@ start = "https://de.wikipedia.org/wiki/Deutschland"
 base = "https://de.wikipedia.org"
 firebase = "https://wikipedianavigator-default-rtdb.europe-west1.firebasedatabase.app/articles"
 
-start = "https://de.wikipedia.org/wiki/%CE%9413C"
+start = "https://de.wikipedia.org/wiki/Zauberw%C3%BCrfel"
 
 @logger.catch()
 def create_tag(tag):
@@ -22,8 +22,10 @@ def create_tag(tag):
 	return res
 
 def make_article(url):
-	req = requests.get(url)
-
+	try:
+		req = requests.get(url)
+	except:
+		return None
 	if req.status_code != 200:
 		return None
 
