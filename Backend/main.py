@@ -24,6 +24,6 @@ def get():
     except FileNotFoundError:
         articles = {"articles": []}
 
-    return Response(status=200, articles)
+    return Response(status=200, data=articles)
 
 app.run(port=5000)

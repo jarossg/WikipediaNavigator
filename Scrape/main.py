@@ -10,7 +10,7 @@ start = "https://de.wikipedia.org/wiki/Deutschland"
 base = "https://de.wikipedia.org"
 firebase = "https://wikipedianavigator-default-rtdb.europe-west1.firebasedatabase.app/articles"
 
-start = "https://de.wikipedia.org/wiki/Zauberw%C3%BCrfel"
+start = "https://de.wikipedia.org/wiki/KTM_Motor-Fahrzeugbau"
 
 @logger.catch()
 def create_tag(tag):
