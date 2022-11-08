@@ -1,4 +1,4 @@
-from flask import Flask, Response, request
+from flask import Flask, Response, request, jsonify
 from loguru import logger
 import json
 
@@ -27,6 +27,6 @@ def get():
     except FileNotFoundError:
         articles = {"articles": {}}
 
-    return Response(status=200, data=articles)
+    return jsonify(articles)
 
 app.run(port=5000, host="0.0.0.0")
