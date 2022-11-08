@@ -71,7 +71,7 @@ function buildGraph(){
 }
 
 async function start(){
-  var data = httpGet("https://wikipedianavigator-default-rtdb.europe-west1.firebasedatabase.app/articles.json");
+  var data = httpGet("http://jarossgarrit.de:8080/get");
   console.log("Data aquired");
   worker.postMessage(data);
 
