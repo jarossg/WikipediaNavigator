@@ -1,11 +1,11 @@
 import requests
 import json
 
-URL = "http://127.0.0.1:5000"
+URL = "http://jarossgarrit.de:8080"
 
 
 with open("articles.json", "r") as file:
-    data = json.loads(file.read())
+    data = json.loads(file)
     #print(data)
 
     

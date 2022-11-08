@@ -10,4 +10,4 @@ if req.status_code != 200:
     exit()
 
 with open("articles.json", "w", encoding="utf-8") as file:
-    json.dump(req.json(), file, ensure_ascii=False, indent=4)
+    json.dump({"articles":req.json()}, file, ensure_ascii=False, indent=4)
