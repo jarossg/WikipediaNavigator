@@ -1,9 +1,11 @@
 from flask import Flask, Response, request, jsonify
+from flask_cors import CORS
 from loguru import logger
 import json
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/add/<article>", methods=["POST"])
 def main(article):
@@ -28,5 +30,6 @@ def get():
         articles = {"articles": {}}
 
     return jsonify(articles)
+
 
 app.run(port=5000, host="0.0.0.0")
