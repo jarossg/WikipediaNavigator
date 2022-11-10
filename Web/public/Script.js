@@ -71,7 +71,7 @@ function buildGraph(){
 }
 
 async function start(){
-  var data = httpGet("http://jarossgarrit.de:8080/get");
+  var data = httpGet("http://database:5000/get");
   console.log("Data aquired");
   worker.postMessage(data);
 

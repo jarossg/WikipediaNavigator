@@ -1,5 +1,14 @@
 {
+  "name": "wikipedia_navigator",
+  "version": "1.0.0",
+  "description": "Wikipedia Navigator",
+  "author": "Garrit Jaross <g.jaross@web.de>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
-    "vis-network": "^9.1.2"
+    "vis-network": "^9.1.2",
+    "express" : "^4.16.1"
   }
 }
